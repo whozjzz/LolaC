@@ -1,14 +1,7 @@
 /* Gallery Section Styles */
 
 .gallery_section {
-    width: 100%;
-    min-height: 100vh;
-    padding: 8rem 2rem 3rem 2rem;
-    background-color: var(--main-bg);
-    background-image: url("img/BG.jpg");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    /* inherited from .hero, matching home’s new style */
 }
 
 /* Gallery Header */
@@ -112,13 +105,29 @@
 }
 
 @media (max-width: 768px) {
-    .gallery_section {
-        padding: 6rem 1rem 3rem 1rem;
+    .navbar {
+        width: 90%;
+        max-width: 340px;
+        padding: 0.6rem 1.2rem;
+        flex-direction: row;
+        gap: 15px;
+        top: 15px;
     }
 
+    .hero, .gallery_section {
+        padding-top: 130px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .left_name,
     .gallery_header h2 {
         font-size: 2.2rem;
-        margin-bottom: 1rem;
+    }
+
+    .gallery_grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .gallery_grid {
@@ -249,6 +258,9 @@
 }
 
 /* Modal Responsive */
+/* Locked-in Pill Navbar inherits from styles.css */
+
+/* Media queries */
 @media (max-width: 1024px) {
     .modal-images {
         grid-template-columns: repeat(2, 1fr);
@@ -260,6 +272,23 @@
         grid-template-columns: 1fr;
         gap: 10px;
         padding: 15px;
+    }
+
+    .navbar {
+        width: 90%;
+        max-width: 340px;
+        padding: 0.6rem 1.2rem;
+        flex-direction: row;
+        gap: 15px;
+        top: 15px;
+    }
+
+    .gallery_section {
+        padding-top: 130px;
+    }
+
+    .gallery_header h2 {
+        font-size: 2rem;
     }
 }
 

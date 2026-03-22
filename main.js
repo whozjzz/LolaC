@@ -66,16 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 modal.style.display = 'block';
+                body.style.overflow = 'hidden';
             });
         });
 
         closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
+            body.style.overflow = 'auto';
         });
 
         window.addEventListener('click', (e) => {
             if (e.target === modal) {
                 modal.style.display = 'none';
+                body.style.overflow = 'auto';
             }
         });
     }
