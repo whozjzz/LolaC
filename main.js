@@ -34,9 +34,8 @@ window.toggleCategory = function(category) {
         });
     }
 
-    // Scroll Logic
+    // Scroll Logic: Using requestAnimationFrame ensures the new larger images are rendered before scrolling
     if (isOpen) {
-        // requestAnimationFrame ensures the 'display: block' has finished rendering
         requestAnimationFrame(() => {
             expansion.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });

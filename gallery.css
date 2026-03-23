@@ -29,7 +29,7 @@
     border-radius: 2px;
 }
 
-/* Main Grid Configuration */
+/* Main Grid Configuration (Category Cards) */
 .gallery_grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -40,7 +40,6 @@
     align-items: start;
 }
 
-/* Category Cards */
 .gallery_item {
     background-color: var(--soft-bg);
     border-radius: 16px;
@@ -72,10 +71,9 @@
     text-align: center;
 }
 
-/* --- CATEGORY EXPANSION (The "Shelf") --- */
+/* --- CATEGORY EXPANSION --- */
 .category_expansion {
     grid-column: 1 / -1; 
-    /* Hides the entire block so buttons don't stack */
     display: none; 
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(12px);
@@ -87,7 +85,7 @@
 }
 
 .category_expansion.open {
-    display: block; /* Shows the container when clicked */
+    display: block; 
     animation: fadeInExpansion 0.5s ease-out;
 }
 
@@ -96,28 +94,42 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* --- DYNAMIC FLUID GRID (Updated for larger images) --- */
 .expansion_grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 20px;
-    padding: 40px 40px 20px 40px;
-    /* Keeps image loading contained during the opening animation */
+    /* Allows images to be at least 300px and fill the row */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 25px;
+    padding: 40px;
     overflow: hidden; 
 }
 
+
+
 .expansion_grid img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1; /* Square ratio makes images look larger */
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    
+    /* PROTECTION: Prevents saving/dragging on desktop and mobile */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.expansion_grid img:hover {
+    transform: scale(1.02);
 }
 
 /* --- FLOATING STICKY CLOSE BUTTON --- */
 .close_button {
     position: -webkit-sticky; 
     position: sticky;
-    bottom: 30px; /* Floats 30px above the bottom edge of the screen */
+    bottom: 30px; 
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -149,7 +161,9 @@
 @media (max-width: 768px) {
     .gallery_grid { grid-template-columns: 1fr; }
     .expansion_grid { 
-        grid-template-columns: repeat(2, 1fr);
-        padding: 20px 20px 0 20px;
+        /* Adjusts images to 150px minimum on small screens for 2 clear columns */
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        padding: 20px;
+        gap: 12px;
     }
 }
