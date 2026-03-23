@@ -21,52 +21,42 @@
 
     <section class="gallery_section">
         <div class="gallery_header">
-            <h2>Stories We Cherish</h2>
+            <h2>Memories We Cherish</h2>
             <div class="divider"></div>
         </div>
 
         <div class="gallery_grid">
-            <div class="gallery_item" data-category="travels">
-                <div class="image_wrapper">
-                    <img src="img/t1.jpg" alt="Travels">
-                </div>
-                <div class="item_info">
-                    <h3>Travels</h3>
-                    <p>Exploring the world and creating memories</p>
-                </div>
+            <div class="gallery_item" onclick="toggleCategory('travels')">
+                <div class="image_wrapper"><img src="img/t1.jpg" alt="Travels"></div>
+                <div class="item_info"><h3>Travels</h3><p>Exploring the world</p></div>
             </div>
 
-            <div class="gallery_item" data-category="family">
-                <div class="image_wrapper">
-                    <img src="img/1.jpg" alt="Family">
-                </div>
-                <div class="item_info">
-                    <h3>Family</h3>
-                    <p>Cherished moments with loved ones</p>
-                </div>
+            <div class="gallery_item" onclick="toggleCategory('family')">
+                <div class="image_wrapper"><img src="img/Fam1.jpg" alt="Family"></div>
+                <div class="item_info"><h3>Family</h3><p>Cherished moments</p></div>
             </div>
 
-            <div class="gallery_item" data-category="solo">
-                <div class="image_wrapper">
-                    <img src="img/I1.jpg" alt="Solo">
-                </div>
-                <div class="item_info">
-                    <h3>Solo</h3>
-                    <p>Personal journeys and self-discovery</p>
-                </div>
+            <div class="gallery_item" onclick="toggleCategory('solo')">
+                <div class="image_wrapper"><img src="img/intro1.jpg" alt="Solo"></div>
+                <div class="item_info"><h3>Solo</h3><p>Personal journeys</p></div>
+            </div>
+
+            <div id="travels-expansion" class="category_expansion">
+                <div class="expansion_grid" id="travels-grid"></div>
+                <div class="close_button" onclick="toggleCategory('travels')">Close Travels &times;</div>
+            </div>
+
+            <div id="family-expansion" class="category_expansion">
+                <div class="expansion_grid" id="family-grid"></div>
+                <div class="close_button" onclick="toggleCategory('family')">Close Family &times;</div>
+            </div>
+
+            <div id="solo-expansion" class="category_expansion">
+                <div class="expansion_grid" id="solo-grid"></div>
+                <div class="close_button" onclick="toggleCategory('solo')">Close Solo &times;</div>
             </div>
         </div>
     </section>
-
-    <!-- Modal for expanded images -->
-    <div id="imageModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="modal-images" id="modalImages">
-                <!-- Images will be loaded here -->
-            </div>
-        </div>
-    </div>
 
     <script src="main.js"></script>
 </body>

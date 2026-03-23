@@ -1,10 +1,14 @@
 /* Gallery Section Styles */
-
 .gallery_section {
-    /* inherited from .hero, matching home’s new style */
+    width: 100%;
+    min-height: 100vh;
+    padding: 160px 2rem 5rem 2rem; 
+    background-image: url("img/BG.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
-/* Gallery Header */
 .gallery_header {
     text-align: center;
     margin-bottom: 4rem;
@@ -15,7 +19,6 @@
     font-size: 3rem;
     color: var(--text-main);
     margin-bottom: 1.5rem;
-    letter-spacing: 0.05rem;
 }
 
 .divider {
@@ -26,7 +29,7 @@
     border-radius: 2px;
 }
 
-/* Gallery Grid */
+/* Main Grid Configuration */
 .gallery_grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -34,296 +37,119 @@
     padding: 0 1rem;
     max-width: 1200px;
     margin: 0 auto;
+    align-items: start;
 }
 
-/* Gallery Item */
+/* Category Cards */
 .gallery_item {
     background-color: var(--soft-bg);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.35s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    cursor: pointer;
 }
 
 .gallery_item:hover {
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
-    transform: translateY(-8px);
+    transform: translateY(-5px);
 }
 
-/* Image Wrapper */
 .image_wrapper {
     width: 100%;
     height: 240px;
     overflow: hidden;
-    background-color: #9a8b75;
-    position: relative;
 }
 
 .image_wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
 }
 
-.gallery_item:hover .image_wrapper img {
-    transform: scale(1.05);
-}
-
-/* Item Info */
 .item_info {
-    padding: 2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 1.5rem;
+    text-align: center;
 }
 
-.item_info h3 {
-    font-family: 'Libre Baskerville', serif;
-    font-size: 1.6rem;
-    color: var(--text-main);
-    margin-bottom: 0.8rem;
-    letter-spacing: 0.03rem;
+/* --- CATEGORY EXPANSION (The "Shelf") --- */
+.category_expansion {
+    grid-column: 1 / -1; 
+    /* Hides the entire block so buttons don't stack */
+    display: none; 
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    position: relative; 
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.item_info p {
-    font-size: 1rem;
-    color: var(--text-accent);
-    line-height: 1.6;
-    margin: 0;
+.category_expansion.open {
+    display: block; /* Shows the container when clicked */
+    animation: fadeInExpansion 0.5s ease-out;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .gallery_grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@keyframes fadeInExpansion {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        width: 90%;
-        max-width: 340px;
-        padding: 0.6rem 1.2rem;
-        flex-direction: row;
-        gap: 15px;
-        top: 15px;
-    }
-
-    .hero, .gallery_section {
-        padding-top: 130px;
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .left_name,
-    .gallery_header h2 {
-        font-size: 2.2rem;
-    }
-
-    .gallery_grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .gallery_grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .image_wrapper {
-        height: 200px;
-    }
-
-    .item_info {
-        padding: 1.5rem;
-    }
-
-    .item_info h3 {
-        font-size: 1.4rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .gallery_header h2 {
-        font-size: 1.8rem;
-    }
-
-    .divider {
-        width: 60px;
-    }
-
-    .item_info {
-        padding: 1.2rem;
-    }
-
-    .item_info h3 {
-        font-size: 1.2rem;
-    }
-
-    .item_info p {
-        font-size: 0.95rem;
-    }
-}
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-.modal-content {
-    /* Centering and Floating */
-    margin: 4vh auto;      /* 4% space from top and bottom */
-    width: 90%;
-    max-width: 1200px;
-    height: 92vh;          /* Keeps it from touching the bottom */
-    
-    display: flex;
-    flex-direction: column;
-    background-color: #F6F3EE; /* Using your --main-bg for coherence */
-    border-radius: 24px;   /* Softer corners to match the vibe */
-    overflow: hidden;
-    position: relative;    /* Required for absolute positioning of 'X' */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.close {
-    position: absolute;    /* Pulls it out of the flow */
-    top: 15px;
-    right: 25px;
-    z-index: 1001;         /* Stays on top of images */
-    color: var(--bg-dark);
-    font-size: 35px;       /* Slightly smaller for elegance */
-    line-height: 1;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.close:hover {
-    transform: rotate(90deg);
-    color: var(--accent);
-}
-
-.modal-images {
-    flex: 1;
+.expansion_grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
-    padding: 60px 40px 40px 40px; /* Large top padding to clear the 'X' button */
-    overflow-y: auto;
+    padding: 40px 40px 20px 40px;
+    /* Keeps image loading contained during the opening animation */
+    overflow: hidden; 
 }
 
-.modal-images img {
+.expansion_grid img {
     width: 100%;
-    height: 200px;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* --- FLOATING STICKY CLOSE BUTTON --- */
+.close_button {
+    position: -webkit-sticky; 
+    position: sticky;
+    bottom: 30px; /* Floats 30px above the bottom edge of the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: block; 
+    width: fit-content;
+    padding: 12px 30px;
+    background-color: var(--text-main);
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    border-radius: 50px;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin: 20px auto 40px auto; 
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.modal-images img:hover {
-    transform: scale(1.05);
+.close_button:hover {
+    background-color: var(--accent);
+    transform: translateX(-50%) scale(1.05);
 }
 
-/* Custom Scrollbar for Modal */
-.modal-images::-webkit-scrollbar {
-    width: 10px;
-}
-
-.modal-images::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.modal-images::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-.modal-images::-webkit-scrollbar-thumb:hover {
-    background: var(--text-main);
-}
-
-/* Modal Responsive */
-/* Locked-in Pill Navbar inherits from styles.css */
-
-/* Media queries */
+/* --- RESPONSIVE DESIGN --- */
 @media (max-width: 1024px) {
-    .modal-images {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .gallery_grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .modal-images {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .navbar {
-        width: 90%;
-        max-width: 340px;
-        padding: 0.6rem 1.2rem;
-        flex-direction: row;
-        gap: 15px;
-        top: 15px;
-    }
-
-    .gallery_section {
-        padding-top: 130px;
-    }
-
-    .gallery_header h2 {
-        font-size: 2rem;
+    .gallery_grid { grid-template-columns: 1fr; }
+    .expansion_grid { 
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 20px 0 20px;
     }
 }
-
-@media (max-width: 480px) {
-    .gallery_grid {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-    }
-
-    .gallery_section {
-        padding: 4rem 1rem 2rem;
-    }
-
-    .gallery_item {
-        margin: 0 auto;
-    }
-
-    .modal-content {
-        width: 95%;
-        height: 90vh;
-        margin: 5vh auto;
-        border-radius: 18px;
-    }
-
-    .modal-images {
-        gap: 10px;
-        padding: 50px 14px 14px;
-    }
-
-    .modal-images img {
-        height: 170px;
-    }
-
-    .page-loader {
-        padding: 12px;
-    }
-}
-
