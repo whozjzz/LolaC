@@ -29,7 +29,7 @@
     border-radius: 2px;
 }
 
-/* Main Grid Configuration (Category Cards) */
+/* Main Grid Configuration (Top-level Categories) */
 .gallery_grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -94,27 +94,25 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- DYNAMIC FLUID GRID (Updated for larger images) --- */
+/* --- DYNAMIC GRID (One Column on Mobile) --- */
 .expansion_grid {
     display: grid;
-    /* Allows images to be at least 300px and fill the row */
+    /* Desktop: Images try to stay at least 300px wide */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 25px;
     padding: 40px;
     overflow: hidden; 
 }
 
-
-
 .expansion_grid img {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Square ratio makes images look larger */
+    aspect-ratio: 1 / 1; 
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
     
-    /* PROTECTION: Prevents saving/dragging on desktop and mobile */
+    /* PROTECTION: Prevents saving/dragging */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -161,9 +159,9 @@
 @media (max-width: 768px) {
     .gallery_grid { grid-template-columns: 1fr; }
     .expansion_grid { 
-        /* Adjusts images to 150px minimum on small screens for 2 clear columns */
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        /* By setting min width to 280px, it forces 1 column on most phones */
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         padding: 20px;
-        gap: 12px;
+        gap: 20px;
     }
 }
